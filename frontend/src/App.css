@@ -31,3 +31,7 @@
     transform: rotate(360deg);
   }
 }
+
+#root > div > div {
+  z-index: 99999 !important;
+}

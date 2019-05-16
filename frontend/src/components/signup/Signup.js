@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, TextInput, Card } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import toastr from 'toastr'
+import { Redirect } from 'react-router-dom'
 
 const service = new AuthService()
 
@@ -11,7 +12,8 @@ export default class Signup extends Component {
       name: '',
       email: '',
       password: ''
-    }
+    },
+    navigate: false
   }
 
   handleInput = e => {
@@ -29,11 +31,15 @@ export default class Signup extends Component {
         console.log(res)
         toastr.success('You successfuly created an account')
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data))
+        setTimeout(() => this.setState({ navigate: true }), 2000)
       })
       .catch(err => toastr.error('Something went wrong'))
   }
 
   render() {
+    if (this.state.navigate) {
+      return <Redirect to={'/login'} />
+    }
     return (
       <div className="container">
         <h1>Sign up</h1>
@@ -60,6 +66,7 @@ export default class Signup extends Component {
               label="Password"
               onChange={this.handleInput}
             />
+
             <input
               type="submit"
               value="Create an account"

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Button, TextInput, Card } from 'react-materialize'
+import AuthService from '../../services/Auth'
+
+const service = new AuthService()
 
 export default class Signup extends Component {
   state = {
@@ -14,9 +17,13 @@ export default class Signup extends Component {
     const { form } = this.state
     form[e.target.name] = e.target.value
     this.setState(form)
+    console.log(this.state.form)
   }
 
-  handleSubmit = e => {}
+  handleSubmit = e => {
+    service.signup(this.state.form)
+    console.log(this.state.form)
+  }
 
   render() {
     return (
@@ -24,10 +31,25 @@ export default class Signup extends Component {
         <h1>Sign up</h1>
         <Card>
           <form>
-            <TextInput placeholder="Name" />
-            <TextInput email validate label="Email" />
-            <TextInput password label="Password" />
-            <Button>Sign up</Button>
+            <TextInput
+              name="name"
+              placeholder="Name"
+              onChange={this.handleInput}
+            />
+            <TextInput
+              name="email"
+              email
+              validate
+              label="Email"
+              onChange={this.handleInput}
+            />
+            <TextInput
+              name="password"
+              password
+              label="Password"
+              onChange={this.handleInput}
+            />
+            <Button onClick={this.handleSubmit}>Create an account!</Button>
           </form>
         </Card>
       </div>

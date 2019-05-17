@@ -76,6 +76,6 @@ const index = require('./routes/index')
 app.use('/', index)
 
 //API routes
-app.use('/api/subscriptions', require('./routes/api/subscriptions'))
+app.use('/api/typesubscriptions', require('./routes/api/typeSubscriptions'))
 
 module.exports = app

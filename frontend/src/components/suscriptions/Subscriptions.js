@@ -9,7 +9,7 @@ export default class Suscriptions extends Component {
   render() {
     return (
       <div>
-        <h1>Suscriptions</h1>
+        <h1>Subscriptions</h1>
       </div>
     )
   }

@@ -11,6 +11,12 @@ export default function Home() {
           Sign up
         </Button>
       </Link>
+
+      <Link to={'/login'}>
+        <Button waves="light" style={{ marginRight: '5px' }}>
+          Log in
+        </Button>
+      </Link>
     </div>
   )
 }

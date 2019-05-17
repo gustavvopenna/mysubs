@@ -16,6 +16,7 @@ router.post('/api/signup', (req, res, next) => {
 })
 
 router.post('/api/login', (req, res, next) => {
+  console.log(req)
   passport.authenticate('local', (err, user, infoError) => {
     if (err) return res.status(500).json({ err, infoError })
     if (!user) return res.status(401).json({ msg: "This user doesn't exist" })
@@ -24,6 +25,17 @@ router.post('/api/login', (req, res, next) => {
       res.status(200).json(user)
     })
   })(req, res, next)
+})
+
+// router.post('/api/login', passport.authenticate('local'), (req, res, next) => {
+//   res.json({ msg: req.user })
+// })
+
+router.get('/api/logout', (req, res, next) => {
+  req.logout()
+  console.log(res.user, ' despues')
+  res.status(200).json({ user: res.user })
+  // res.redirect('/')
 })
 
 router.get('/api/private', isLogged, (req, res, next) => {

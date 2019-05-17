@@ -4,10 +4,11 @@ import AuthService from '../../services/Auth'
 import toastr from 'toastr'
 import { Redirect } from 'react-router-dom'
 import history from '../history'
+import { withRouter } from 'react-router-dom'
 
 const service = new AuthService()
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     form: {
       email: '',
@@ -28,10 +29,12 @@ export default class Login extends Component {
     service
       .login(this.state.form)
       .then(res => {
+        console.log(this.props.data)
         if (res.err) return toastr.error(res.err)
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data))
-        toastr.success('Login successful!')
-        history.push('/suscriptions')
+        toastr.success('Login successful')
+        //history.push('/suscriptions')
+        this.props.history.push('/suscriptions')
       })
       .catch(err => console.log(err))
   }
@@ -69,3 +72,5 @@ export default class Login extends Component {
     )
   }
 }
+
+export default withRouter(Login)

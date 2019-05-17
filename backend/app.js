@@ -32,8 +32,8 @@ const app = express()
 app.use(
   session({
     secret: 's3cr3t',
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }
   })
 )

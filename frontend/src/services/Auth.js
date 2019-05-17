@@ -13,7 +13,7 @@ class AuthService {
   signup = form => {
     return this.service
       .post('/api/signup', form)
-      .then(({ data }) => data)
+      .then(({ data }) => console.log(data, ' data'))
       .catch(err => err)
   }
 
@@ -21,7 +21,19 @@ class AuthService {
     return this.service
       .post('/api/login', form)
       .then(res => res)
-      .catch(err => err)
+      .catch(err => {
+        return { err: 'Incorrect user or password' }
+      })
+  }
+
+  logout = () => {
+    return (
+      this.service
+        .get('/api/logout')
+        .then(response => console.log(response))
+        //.catch(err => ({ err: 'Logout went wrong' }))
+        .catch(err => console.log(err))
+    )
   }
 }
 

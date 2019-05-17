@@ -13,7 +13,7 @@ class AuthService {
   signup = form => {
     return this.service
       .post('/api/signup', form)
-      .then(({ data }) => console.log(data, ' data'))
+      .then(({ data }) => data)
       .catch(err => err)
   }
 

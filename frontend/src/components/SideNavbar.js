@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SideNav, SideNavItem } from 'react-materialize'
 import { Link } from 'react-router-dom'
 import AuthService from '../services/Auth'
-import history from './history'
+//import history from './history'
 import { withRouter } from 'react-router-dom'
 import toastr from 'toastr'
 

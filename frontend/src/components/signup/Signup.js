@@ -20,7 +20,7 @@ export default class Signup extends Component {
     const { form } = this.state
     form[e.target.name] = e.target.value
     this.setState(form)
-    console.log(this.state.form)
+    //console.log(this.state.form)
   }
 
   handleSubmit = e => {
@@ -33,7 +33,8 @@ export default class Signup extends Component {
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data))
         setTimeout(() => this.setState({ navigate: true }), 2000)
       })
-      .catch(err => toastr.error('Something went wrong'))
+      //.catch(err => toastr.error('Something went wrong'))
+      .catch(err => console.log(err))
   }
 
   render() {

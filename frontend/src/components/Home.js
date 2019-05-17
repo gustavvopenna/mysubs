@@ -1,6 +1,5 @@
 import React from 'react'
-import Signup from './signup/Signup'
-import { SideNav, SideNavItem, Button } from 'react-materialize'
+import { Button } from 'react-materialize'
 import { Link } from 'react-router-dom'
 
 export default function Home() {

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Button } from 'react-materialize'
+import { Link } from 'react-router-dom'
 
 export default class Suscriptions extends Component {
   componentWillMount() {
@@ -10,6 +12,9 @@ export default class Suscriptions extends Component {
     return (
       <div>
         <h1>Subscriptions</h1>
+        <Link to={'/subscriptionsList'}>
+          <Button floating large className="red" waves="light" icon="add" />
+        </Link>
       </div>
     )
   }

@@ -35,6 +35,15 @@ class AuthService {
         .catch(err => console.log(err))
     )
   }
+
+  allTypeSubscriptions = () => {
+    return this.service
+      .get('/api/typesubscriptions')
+      .then(response => response)
+      .catch(err => {
+        return { msg: 'Something went wrong' }
+      })
+  }
 }
 
 export default AuthService

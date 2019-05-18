@@ -5,6 +5,7 @@ import Signup from './components/signup/Signup'
 import Login from './components/login/Login'
 import SideNavbar from './components/SideNavbar.js'
 import Subscriptions from './components/suscriptions/Subscriptions'
+import subscriptionsList from './components/newSubscription/subscriptionsList'
 
 const Routes = () => (
   <div>
@@ -14,6 +15,7 @@ const Routes = () => (
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/suscriptions" component={Subscriptions} />
+      <Route exact path="/subscriptionslist" component={subscriptionsList} />
     </Switch>
   </div>
 )

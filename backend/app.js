@@ -77,5 +77,6 @@ app.use('/', index)
 
 //API routes
 app.use('/api/typesubscriptions', require('./routes/api/typeSubscriptions'))
+app.use('/api/subscriptions', require('./routes/api/subscriptions'))
 
 module.exports = app

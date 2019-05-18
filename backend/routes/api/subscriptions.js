@@ -42,4 +42,18 @@ router.post('/', (req, res, next) => {
     .catch(err => res.status(500).json(err))
 })
 
+//Update a subscription
+router.patch('/:id', (req, res, next) => {
+  Subscription.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(subscription => res.status(200).json(subscription))
+    .catch(err => res.status(500).json(err))
+})
+
+//Delete a subscription
+router.delete('/:id', (req, res, next) => {
+  Subscription.findByIdAndDelete(req.params.id)
+    .then(subscription => res.status(200).json(subscription))
+    .catch(err => res.status(500).json(err))
+})
+
 module.exports = router

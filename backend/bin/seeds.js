@@ -32,7 +32,7 @@ const typeSubscriptions = [
     version: {
       prime: { key_name: 'prime', name: 'Prime', price: 899 }
     },
-    color: '#F9F9F9',
+    color: '#97AEEE',
     imageURL_color:
       'https://upload.wikimedia.org/wikipedia/commons/2/27/Amazon_Prime_logo.png',
     imageURL_black:
@@ -43,9 +43,11 @@ const typeSubscriptions = [
     version: {
       hboGo: { key_name: 'hboGo', name: 'HBO Go', price: 99 }
     },
-    color: '#000',
-    imageURL_color: 'https://image.flaticon.com/icons/svg/870/870903.svg',
-    imageURL_black: 'https://image.flaticon.com/icons/svg/871/871005.svg'
+    color: '#D9D9DA',
+    imageURL_color:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/HBOGO.svg/1280px-HBOGO.svg.png',
+    imageURL_black:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/HBOGO.svg/1280px-HBOGO.svg.png'
   },
   {
     name: 'Apple Music',
@@ -54,7 +56,7 @@ const typeSubscriptions = [
       student: { key_name: 'student', name: 'Estudiante', price: 49 },
       family: { key_name: 'family', name: 'Familia', price: 149 }
     },
-    color: '#F9F9F9',
+    color: '#8B2EB3',
     imageURL_color: 'https://image.flaticon.com/icons/svg/1384/1384061.svg',
     imageURL_black: 'https://image.flaticon.com/icons/svg/1384/1384029.svg'
   },

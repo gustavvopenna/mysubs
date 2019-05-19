@@ -9,6 +9,18 @@ const typeSubscriptionSchema = new mongoose.Schema(
     version: {
       type: {},
       require: true
+    },
+    color: {
+      type: String,
+      require: true
+    },
+    imageURL_color: {
+      type: String,
+      require: true
+    },
+    imageURL_black: {
+      type: String,
+      require: true
     }
   },
   {

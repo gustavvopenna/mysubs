@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, TextInput, Card } from 'react-materialize'
+import { TextInput, Card } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import toastr from 'toastr'
 import { Redirect } from 'react-router-dom'

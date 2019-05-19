@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Button, TextInput, Card } from 'react-materialize'
+import { TextInput, Card } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import toastr from 'toastr'
-import { Redirect } from 'react-router-dom'
-import history from '../history'
+// import history from '../history'
+// import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 const service = new AuthService()

@@ -28,8 +28,8 @@ export default class subscriptionsList extends Component {
         <h1>Subscriptions List</h1>
         {this.state.subscriptions.map(sub => {
           return (
-            <Link to={`/subscriptionslist/${sub._id}`}>
-              <Row key={sub._id} style={{ margin: '0px' }}>
+            <Link key={sub._id} to={`/subscriptionslist/${sub._id}`}>
+              <Row style={{ margin: '0px' }}>
                 <Col m={6} s={12}>
                   <CardPanel
                     style={{

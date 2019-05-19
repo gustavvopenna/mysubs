@@ -6,6 +6,7 @@ import Login from './components/login/Login'
 import SideNavbar from './components/SideNavbar.js'
 import Subscriptions from './components/suscriptions/Subscriptions'
 import subscriptionsList from './components/newSubscription/subscriptionsList'
+import subscriptionForm from './components/newSubscription/subscriptionForm'
 
 const Routes = () => (
   <div>
@@ -16,6 +17,7 @@ const Routes = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/suscriptions" component={Subscriptions} />
       <Route exact path="/subscriptionslist" component={subscriptionsList} />
+      <Route exact path="/subscriptionform" component={subscriptionForm} />
     </Switch>
   </div>
 )

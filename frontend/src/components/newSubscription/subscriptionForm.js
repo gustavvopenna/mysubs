@@ -5,16 +5,18 @@ import Preload from '../Preload'
 import moment from 'moment'
 
 const service = new AuthService()
+const periodArr = ['mensual', 'anual', 'bimestral', 'trimestral', 'semestral']
 
 export default class subscriptionForm extends Component {
   state = {
     subscription: '',
     versions: [],
-    value: '3',
+    value: '',
     formatMoment: 'DD, MM, YYYY',
     form: {
       price: 0,
-      date: ''
+      date: '',
+      period: ''
     }
   }
 
@@ -42,12 +44,9 @@ export default class subscriptionForm extends Component {
 
   handleChange = event => {
     this.setState({ value: event.target.value })
-    // console.log(this.state.subscription)
     // console.log(event.target.value)
-    // console.log(this.state.versions)
+    // console.log(this.state.subscription.version[version])
     const version = event.target.value
-    console.log(event.target.value)
-    console.log(this.state.subscription.version[version])
     this.setState({
       price: this.state.subscription.version[version].price
     })
@@ -59,6 +58,13 @@ export default class subscriptionForm extends Component {
       form: { date: moment(event).format(this.state.formatMoment) }
     })
     console.log(this.state.form.date)
+  }
+
+  //Callback after setState config helps to not have delay in updating state
+  handlePeriod = event => {
+    this.setState({ form: { period: event.target.value } }, () => {
+      console.log(this.state.form.period)
+    })
   }
 
   render() {
@@ -89,11 +95,25 @@ export default class subscriptionForm extends Component {
               )
             })}
           </Select>
+
           <DatePicker
             options={{ format: 'dd/mm/yyyy' }}
             onChange={this.handleDate}
-            label="Fecha"
+            label="Selecciona tu próxima fecha de pago"
           />
+
+          <Select
+            label="Periodo"
+            value={this.state.form.period}
+            onChange={this.handlePeriod}
+          >
+            <option value="" disabled>
+              Choose your option
+            </option>
+            {periodArr.map(option => {
+              return <option value={option}>{option}</option>
+            })}
+          </Select>
         </Card>
       </div>
     )

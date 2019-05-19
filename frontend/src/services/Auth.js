@@ -44,6 +44,15 @@ class AuthService {
         return { msg: 'Something went wrong' }
       })
   }
+
+  oneTypeSubscriptions = id => {
+    return this.service
+      .get(`/api/typesubscriptions/${id}`)
+      .then(response => response)
+      .catch(err => {
+        return { msg: 'Something went wrong' }
+      })
+  }
 }
 
 export default AuthService

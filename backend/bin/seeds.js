@@ -8,9 +8,9 @@ const typeSubscriptions = [
   {
     name: 'Netflix',
     version: {
-      oneScreen: { name: '1 pantalla', price: 99 },
-      twoScreen: { name: '2 pantallas FHD', price: 129 },
-      fourScreen: { name: '4 pantallas 4K', price: 229 }
+      oneScreen: { key_name: 'oneScreen', name: '1 pantalla', price: 99 },
+      twoScreen: { key_name: 'twoScreen', name: '2 pantallas FHD', price: 129 },
+      fourScreen: { key_name: 'fourScreen', name: '4 pantallas 4K', price: 229 }
     },
     color: '#E50914',
     imageURL_color: 'https://image.flaticon.com/icons/svg/870/870910.svg',
@@ -19,9 +19,9 @@ const typeSubscriptions = [
   {
     name: 'Spotify',
     version: {
-      student: { name: 'Estudiante', price: 49 },
-      premium: { name: 'Premium', price: 99 },
-      family: { name: 'Familia', price: 149 }
+      student: { key_name: 'student', name: 'Estudiante', price: 49 },
+      premium: { key_name: 'premium', name: 'Premium', price: 99 },
+      family: { key_name: 'family', name: 'Familia', price: 149 }
     },
     color: '#1ED761',
     imageURL_color: 'https://image.flaticon.com/icons/png/512/226/226773.png',
@@ -30,7 +30,7 @@ const typeSubscriptions = [
   {
     name: 'Amazon Prime',
     version: {
-      prime: { name: 'Prime', price: 899 }
+      prime: { key_name: 'prime', name: 'Prime', price: 899 }
     },
     color: '#F9F9F9',
     imageURL_color:
@@ -41,7 +41,7 @@ const typeSubscriptions = [
   {
     name: 'HBO',
     version: {
-      hboGo: { name: 'HBO Go', price: 99 }
+      hboGo: { key_name: 'hboGo', name: 'HBO Go', price: 99 }
     },
     color: '#000',
     imageURL_color: 'https://image.flaticon.com/icons/svg/870/870903.svg',
@@ -50,9 +50,9 @@ const typeSubscriptions = [
   {
     name: 'Apple Music',
     version: {
-      premium: { name: 'premium', price: 99 },
-      student: { name: 'Estudiante', price: 49 },
-      family: { name: 'Familia', price: 149 }
+      premium: { key_name: 'premium', name: 'premium', price: 99 },
+      student: { key_name: 'student', name: 'Estudiante', price: 49 },
+      family: { key_name: 'family', name: 'Familia', price: 149 }
     },
     color: '#F9F9F9',
     imageURL_color: 'https://image.flaticon.com/icons/svg/1384/1384061.svg',
@@ -61,8 +61,12 @@ const typeSubscriptions = [
   {
     name: 'Dropbox',
     version: {
-      plus: { name: 'Plus', price: 199 },
-      professional: { name: 'Professional', price: 999 }
+      plus: { key_name: 'plus', name: 'Plus', price: 199 },
+      professional: {
+        key_name: 'professional',
+        name: 'Professional',
+        price: 999
+      }
     },
     color: '#007BE8',
     imageURL_color: 'https://image.flaticon.com/icons/svg/174/174845.svg',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Card, Select } from 'react-materialize'
+import { Card, Select, DatePicker } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
+import moment from 'moment'
 
 const service = new AuthService()
 
@@ -10,8 +11,10 @@ export default class subscriptionForm extends Component {
     subscription: '',
     versions: [],
     value: '3',
+    formatMoment: 'DD, MM, YYYY',
     form: {
-      price: 0
+      price: 0,
+      date: ''
     }
   }
 
@@ -48,7 +51,14 @@ export default class subscriptionForm extends Component {
     this.setState({
       price: this.state.subscription.version[version].price
     })
-    //this.setState({ price: })
+  }
+
+  handleDate = event => {
+    console.log(event)
+    this.setState({
+      form: { date: moment(event).format(this.state.formatMoment) }
+    })
+    console.log(this.state.form.date)
   }
 
   render() {
@@ -80,12 +90,17 @@ export default class subscriptionForm extends Component {
             Choose your option
           </option>
           {versions.map((version, i) => {
-            console.log(this.state.subscription.version, '  wtFFFF')
+            //console.log(this.state.subscription.version, '  wtFFFF')
             return (
               <option value={version[1].key_name}>{version[1].name}</option>
             )
           })}
         </Select>
+        <DatePicker
+          options={{ format: 'dd/mm/yyyy' }}
+          onChange={this.handleDate}
+          label="Fecha"
+        />
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card } from 'react-materialize'
+import { Card, Select } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
 
@@ -8,8 +8,11 @@ const service = new AuthService()
 export default class subscriptionForm extends Component {
   state = {
     subscription: '',
-    price: 0,
-    versions: []
+    versions: [],
+    value: '3',
+    form: {
+      price: 0
+    }
   }
 
   componentDidMount() {
@@ -24,6 +27,7 @@ export default class subscriptionForm extends Component {
         //to get price
         const versions = Object.entries(this.state.subscription.version)
         console.log(versions)
+        // const { price } = this.state.form
         this.setState({ price: versions[0][1].price })
         console.log(this.state.price)
         //to get subscription type
@@ -33,11 +37,24 @@ export default class subscriptionForm extends Component {
       .catch(err => console.log(err))
   }
 
+  handleChange = event => {
+    this.setState({ value: event.target.value })
+    // console.log(this.state.subscription)
+    // console.log(event.target.value)
+    // console.log(this.state.versions)
+    const version = event.target.value
+    console.log(event.target.value)
+    console.log(this.state.subscription.version[version])
+    this.setState({
+      price: this.state.subscription.version[version].price
+    })
+    //this.setState({ price: })
+  }
+
   render() {
     //const { price } = this.state.subscription.version.hboGo
     if (!this.state.subscription) return <Preload />
     const { versions } = this.state
-    console.log(versions)
     return (
       <div className="container">
         <Card
@@ -54,6 +71,21 @@ export default class subscriptionForm extends Component {
             </Card>
           )
         })}
+        <Select
+          label="Selecciona tu suscripción"
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          <option value="" disabled>
+            Choose your option
+          </option>
+          {versions.map((version, i) => {
+            console.log(this.state.subscription.version, '  wtFFFF')
+            return (
+              <option value={version[1].key_name}>{version[1].name}</option>
+            )
+          })}
+        </Select>
       </div>
     )
   }

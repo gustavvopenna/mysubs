@@ -73,34 +73,28 @@ export default class subscriptionForm extends Component {
           <h2>{this.state.subscription.name}</h2>
           <h4>${this.state.price}</h4>
         </Card>
-        {versions.map((version, i) => {
-          return (
-            <Card>
-              <p>{version[1].name}</p>
-              <p>${version[1].price}</p>
-            </Card>
-          )
-        })}
-        <Select
-          label="Selecciona tu suscripción"
-          value={this.state.value}
-          onChange={this.handleChange}
-        >
-          <option value="" disabled>
-            Choose your option
-          </option>
-          {versions.map((version, i) => {
-            //console.log(this.state.subscription.version, '  wtFFFF')
-            return (
-              <option value={version[1].key_name}>{version[1].name}</option>
-            )
-          })}
-        </Select>
-        <DatePicker
-          options={{ format: 'dd/mm/yyyy' }}
-          onChange={this.handleDate}
-          label="Fecha"
-        />
+        <Card>
+          <Select
+            label="Selecciona tu suscripción"
+            value={this.state.value}
+            onChange={this.handleChange}
+          >
+            <option value="" disabled>
+              Choose your option
+            </option>
+            {versions.map((version, i) => {
+              //console.log(this.state.subscription.version, '  wtFFFF')
+              return (
+                <option value={version[1].key_name}>{version[1].name}</option>
+              )
+            })}
+          </Select>
+          <DatePicker
+            options={{ format: 'dd/mm/yyyy' }}
+            onChange={this.handleDate}
+            label="Fecha"
+          />
+        </Card>
       </div>
     )
   }

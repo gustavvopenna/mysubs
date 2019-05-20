@@ -54,9 +54,9 @@ class AuthService {
       })
   }
 
-  newSubscriptionForm = () => {
+  newSubscriptionForm = form => {
     return this.service
-      .post('/api/subscriptions')
+      .post('/api/subscriptions', form)
       .then(response => response)
       .catch(err => {
         return { error: err }

@@ -23,6 +23,9 @@ export default class subscriptionForm extends Component {
     formatMoment: 'DD, MM, YYYY',
     oneLabel: '',
     form: {
+      // subscription: '',
+      name: '',
+      planSelected: '',
       price: 0,
       paymentDate: '',
       period: '',
@@ -38,12 +41,16 @@ export default class subscriptionForm extends Component {
       .oneTypeSubscriptions(id)
       .then(res => {
         const { data } = res
+        console.log(data, ' HEEEEY')
         this.setState({ subscription: data })
-        console.log(this.state.subscription)
+        this.setState({ form: { name: data.name } })
+        console.log(this.state.form.name)
+        // this.setState({ form: { subscription: data._id } })
+        // console.log(this.state.form.subscription)
         //to get price
         const versions = Object.entries(this.state.subscription.version)
         console.log(versions)
-        // const { price } = this.state.form
+        // Define initial price
         this.setState({ price: versions[0][1].price })
         console.log(this.state.price)
         //to get subscription type
@@ -56,11 +63,19 @@ export default class subscriptionForm extends Component {
   handleChange = event => {
     this.setState({ value: event.target.value })
     // console.log(event.target.value)
-    // console.log(this.state.subscription.version[version])
     const version = event.target.value
+    //console.log(this.state.subscription.version[version])
     this.setState({
       price: this.state.subscription.version[version].price
     })
+    this.setState(
+      {
+        form: { planSelected: this.state.subscription.version[version] }
+      },
+      () => {
+        console.log(this.state.form.planSelected)
+      }
+    )
   }
 
   handleDate = event => {

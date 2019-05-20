@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Subscription = require('../../models/Subscription')
+const User = require('../../models/User')
 
 //Read all subscriptions
 router.get('/', (req, res, next) => {
@@ -19,6 +20,7 @@ router.get('/:id', (req, res, next) => {
 // Create subscription
 router.post('/', (req, res, next) => {
   const {
+    subscription,
     name,
     planSelected,
     price,
@@ -27,8 +29,10 @@ router.post('/', (req, res, next) => {
     paymentMethod,
     labels
   } = req.body
+  console.log(req, 'THIS IS THE USEEEEER')
   Subscription.create({
-    subscription: req.params.id,
+    owner: req.user._id,
+    subscription,
     name,
     planSelected,
     price,
@@ -37,7 +41,18 @@ router.post('/', (req, res, next) => {
     paymentMethod,
     labels
   })
-    .then(subscription => res.status(200).json(subscription))
+    .then(subscription => {
+      User.findByIdAndUpdate(
+        req.user._id,
+        {
+          $push: { subscriptions: subscription }
+        },
+        { new: true }
+      )
+        .then(res.status(200).json(subscription))
+        .catch(err => res.status(500).json(err))
+      res.status(200).json(subscription)
+    })
     .catch(err => res.status(500).json(err))
 })
 

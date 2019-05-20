@@ -16,7 +16,6 @@ router.post('/api/signup', (req, res, next) => {
 })
 
 router.post('/api/login', (req, res, next) => {
-  console.log(req)
   passport.authenticate('local', (err, user, infoError) => {
     if (err) return res.status(500).json({ err, infoError })
     if (!user) return res.status(401).json({ msg: "This user doesn't exist" })

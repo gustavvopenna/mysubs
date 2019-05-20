@@ -12,8 +12,8 @@ const subscriptionSchema = new Schema({
     type: String,
     require: true
   },
-  subType: {
-    type: String,
+  planSelected: {
+    type: {},
     require: true
   },
   price: {

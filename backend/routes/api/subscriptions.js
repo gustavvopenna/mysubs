@@ -19,7 +19,6 @@ router.get('/:id', (req, res, next) => {
 // Create subscription
 router.post('/', (req, res, next) => {
   const {
-    subscription,
     name,
     subType,
     price,
@@ -29,7 +28,7 @@ router.post('/', (req, res, next) => {
     labels
   } = req.body
   Subscription.create({
-    subscription,
+    subscription: req.params.id,
     name,
     subType,
     price,

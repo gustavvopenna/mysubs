@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
-import { Card, Select, DatePicker } from 'react-materialize'
+import {
+  Card,
+  Select,
+  DatePicker,
+  TextInput,
+  Button,
+  Chip
+} from 'react-materialize'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
 import moment from 'moment'
 
 const service = new AuthService()
 const periodArr = ['mensual', 'anual', 'bimestral', 'trimestral', 'semestral']
+const allLabelsArr = []
 
 export default class subscriptionForm extends Component {
   state = {
@@ -13,10 +21,13 @@ export default class subscriptionForm extends Component {
     versions: [],
     value: '',
     formatMoment: 'DD, MM, YYYY',
+    oneLabel: '',
     form: {
       price: 0,
-      date: '',
-      period: ''
+      paymentDate: '',
+      period: '',
+      paymentMethod: '',
+      labels: []
     }
   }
 
@@ -55,9 +66,9 @@ export default class subscriptionForm extends Component {
   handleDate = event => {
     console.log(event)
     this.setState({
-      form: { date: moment(event).format(this.state.formatMoment) }
+      form: { paymentDate: moment(event).format(this.state.formatMoment) }
     })
-    console.log(this.state.form.date)
+    console.log(this.state.form.paymentDate)
   }
 
   //Callback after setState config helps to not have delay in updating state
@@ -65,6 +76,40 @@ export default class subscriptionForm extends Component {
     this.setState({ form: { period: event.target.value } }, () => {
       console.log(this.state.form.period)
     })
+  }
+
+  handlePaymentMethod = event => {
+    this.setState({ form: { paymentMethod: event.target.value } }, () => {
+      console.log(this.state.form.paymentMethod)
+    })
+  }
+
+  handleOneLabel = event => {
+    this.setState({ oneLabel: event.target.value }, () => {
+      console.log(this.state.oneLabel)
+    })
+  }
+
+  addLabel = event => {
+    event.preventDefault()
+    const label = this.state.oneLabel
+    allLabelsArr.push(label)
+
+    this.setState(
+      {
+        form: { labels: allLabelsArr }
+      },
+      () => {
+        console.log(this.state.form.labels)
+      }
+    )
+
+    this.setState({ oneLabel: '' }, () => {
+      console.log(this.state.oneLabel)
+    })
+
+    // console.log(this.state.oneLabel, ' one label')
+    // console.log(this.state.form.labels, ' all')
   }
 
   render() {
@@ -110,10 +155,27 @@ export default class subscriptionForm extends Component {
             <option value="" disabled>
               Choose your option
             </option>
-            {periodArr.map(option => {
-              return <option value={option}>{option}</option>
+            {periodArr.map(period => {
+              return <option value={period}>{period}</option>
             })}
           </Select>
+          <TextInput
+            value={this.state.form.paymentMethod}
+            onChange={this.handlePaymentMethod}
+            label="Método de pago. Ej. Tarjeta Banamex 6098"
+          />
+
+          {/* Label funcionality breaks everything :(  */}
+
+          {/* <TextInput
+            value={this.state.oneLabel}
+            label="Ingresa una etiqueta"
+            onChange={this.handleOneLabel}
+          />
+          <Button onClick={this.addLabel}>Add</Button>
+          {this.state.form.labels.map((label, i) => {
+            return <Chip key={i}>{label}</Chip>
+          })} */}
         </Card>
       </div>
     )

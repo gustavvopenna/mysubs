@@ -24,7 +24,7 @@ export default class subscriptionForm extends Component {
     formatMoment: 'DD, MM, YYYY',
     oneLabel: '',
     form: {
-      // subscription: '',
+      subscription: '',
       name: '',
       planSelected: '',
       price: 0,
@@ -38,14 +38,18 @@ export default class subscriptionForm extends Component {
   componentDidMount() {
     console.log(this.state.form)
     const { id } = this.props.match.params
+    console.log(this.props)
     service
       .oneTypeSubscriptions(id)
       .then(res => {
         const { data } = res
-        console.log(data, ' HEEEEY')
+        //console.log(data, ' HEEEEY')
         this.setState({ subscription: data })
         this.setState({ form: { ...this.state.form, name: data.name } })
         console.log(this.state.form.name)
+
+        this.setState({ form: { ...this.state.form, subscription: id } })
+        console.log(this.state.form.subscription)
         // this.setState({ form: { subscription: data._id } })
         // console.log(this.state.form.subscription)
         //to get price

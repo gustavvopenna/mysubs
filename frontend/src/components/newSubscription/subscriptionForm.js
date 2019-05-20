@@ -5,7 +5,8 @@ import {
   DatePicker,
   TextInput,
   Button,
-  Chip
+  Chip,
+  Icon
 } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
@@ -35,7 +36,7 @@ export default class subscriptionForm extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.props)
+    console.log(this.state.form)
     const { id } = this.props.match.params
     service
       .oneTypeSubscriptions(id)
@@ -43,7 +44,7 @@ export default class subscriptionForm extends Component {
         const { data } = res
         console.log(data, ' HEEEEY')
         this.setState({ subscription: data })
-        this.setState({ form: { name: data.name } })
+        this.setState({ form: { ...this.state.form, name: data.name } })
         console.log(this.state.form.name)
         // this.setState({ form: { subscription: data._id } })
         // console.log(this.state.form.subscription)
@@ -51,7 +52,9 @@ export default class subscriptionForm extends Component {
         const versions = Object.entries(this.state.subscription.version)
         console.log(versions)
         // Define initial price
-        this.setState({ price: versions[0][1].price })
+        this.setState({
+          form: { ...this.state.form, price: versions[0][1].price }
+        })
         console.log(this.state.price)
         //to get subscription type
         this.setState({ versions: versions })
@@ -70,7 +73,10 @@ export default class subscriptionForm extends Component {
     })
     this.setState(
       {
-        form: { planSelected: this.state.subscription.version[version] }
+        form: {
+          ...this.state.form,
+          planSelected: this.state.subscription.version[version]
+        }
       },
       () => {
         console.log(this.state.form.planSelected)
@@ -81,22 +87,31 @@ export default class subscriptionForm extends Component {
   handleDate = event => {
     console.log(event)
     this.setState({
-      form: { paymentDate: moment(event).format(this.state.formatMoment) }
+      form: {
+        ...this.state.form,
+        paymentDate: moment(event).format(this.state.formatMoment)
+      }
     })
     console.log(this.state.form.paymentDate)
   }
 
   //Callback after setState config helps to not have delay in updating state
   handlePeriod = event => {
-    this.setState({ form: { period: event.target.value } }, () => {
-      console.log(this.state.form.period)
-    })
+    this.setState(
+      { form: { ...this.state.form, period: event.target.value } },
+      () => {
+        console.log(this.state.form.period)
+      }
+    )
   }
 
   handlePaymentMethod = event => {
-    this.setState({ form: { paymentMethod: event.target.value } }, () => {
-      console.log(this.state.form.paymentMethod)
-    })
+    this.setState(
+      { form: { ...this.state.form, paymentMethod: event.target.value } },
+      () => {
+        console.log(this.state.form.paymentMethod)
+      }
+    )
   }
 
   handleOneLabel = event => {
@@ -112,7 +127,7 @@ export default class subscriptionForm extends Component {
 
     this.setState(
       {
-        form: { labels: allLabelsArr }
+        form: { ...this.state.form, labels: allLabelsArr }
       },
       () => {
         console.log(this.state.form.labels)
@@ -127,62 +142,74 @@ export default class subscriptionForm extends Component {
     // console.log(this.state.form.labels, ' all')
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+    service
+      .newSubscriptionForm(this.state.form)
+      .then(response => console.log('You created a new subscription!'))
+      .catch(err => console.log(err))
+  }
+
   render() {
     //const { price } = this.state.subscription.version.hboGo
     if (!this.state.subscription) return <Preload />
     const { versions } = this.state
     return (
       <div className="container">
-        <Card
-          style={{ background: this.state.subscription.color, color: 'white' }}
-        >
-          <h2>{this.state.subscription.name}</h2>
-          <h4>${this.state.price}</h4>
-        </Card>
-        <Card>
-          <Select
-            label="Selecciona tu suscripción"
-            value={this.state.value}
-            onChange={this.handleChange}
+        <form onSubmit={this.handleSubmit}>
+          <Card
+            style={{
+              background: this.state.subscription.color,
+              color: 'white'
+            }}
           >
-            <option value="" disabled>
-              Choose your option
-            </option>
-            {versions.map((version, i) => {
-              //console.log(this.state.subscription.version, '  wtFFFF')
-              return (
-                <option value={version[1].key_name}>{version[1].name}</option>
-              )
-            })}
-          </Select>
+            <h2>{this.state.subscription.name}</h2>
+            <h4>${this.state.price}</h4>
+          </Card>
+          <Card>
+            <Select
+              label="Selecciona tu suscripción"
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              <option value="" disabled>
+                Choose your option
+              </option>
+              {versions.map((version, i) => {
+                //console.log(this.state.subscription.version, '  wtFFFF')
+                return (
+                  <option value={version[1].key_name}>{version[1].name}</option>
+                )
+              })}
+            </Select>
 
-          <DatePicker
-            options={{ format: 'dd/mm/yyyy' }}
-            onChange={this.handleDate}
-            label="Selecciona tu próxima fecha de pago"
-          />
+            <DatePicker
+              options={{ format: 'dd/mm/yyyy' }}
+              onChange={this.handleDate}
+              label="Selecciona tu próxima fecha de pago"
+            />
 
-          <Select
-            label="Periodo"
-            value={this.state.form.period}
-            onChange={this.handlePeriod}
-          >
-            <option value="" disabled>
-              Choose your option
-            </option>
-            {periodArr.map(period => {
-              return <option value={period}>{period}</option>
-            })}
-          </Select>
-          <TextInput
-            value={this.state.form.paymentMethod}
-            onChange={this.handlePaymentMethod}
-            label="Método de pago. Ej. Tarjeta Banamex 6098"
-          />
+            <Select
+              label="Periodo"
+              value={this.state.form.period}
+              onChange={this.handlePeriod}
+            >
+              <option value="" disabled>
+                Choose your option
+              </option>
+              {periodArr.map(period => {
+                return <option value={period}>{period}</option>
+              })}
+            </Select>
+            <TextInput
+              value={this.state.form.paymentMethod}
+              onChange={this.handlePaymentMethod}
+              label="Método de pago. Ej. Tarjeta Banamex 6098"
+            />
 
-          {/* Label funcionality breaks everything :(  */}
+            {/* Label funcionality breaks everything :(  */}
 
-          {/* <TextInput
+            {/* <TextInput
             value={this.state.oneLabel}
             label="Ingresa una etiqueta"
             onChange={this.handleOneLabel}
@@ -191,7 +218,15 @@ export default class subscriptionForm extends Component {
           {this.state.form.labels.map((label, i) => {
             return <Chip key={i}>{label}</Chip>
           })} */}
-        </Card>
+            <input type="submit" value="Agregar suscripcion" />
+            {/* <Button
+                style={{ backgroundColor: '#37474f', color: '#fff' }}
+                onClick={this.handleSubmit}
+              >
+                Save subscription <Icon tiny>save_alt</Icon>
+              </Button> */}
+          </Card>
+        </form>
       </div>
     )
   }

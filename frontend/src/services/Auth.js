@@ -53,6 +53,15 @@ class AuthService {
         return { msg: 'Something went wrong' }
       })
   }
+
+  newSubscriptionForm = () => {
+    return this.service
+      .post('/api/subscriptions')
+      .then(response => response)
+      .catch(err => {
+        return { error: err }
+      })
+  }
 }
 
 export default AuthService

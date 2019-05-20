@@ -11,6 +11,7 @@ import {
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
 import moment from 'moment'
+import { Redirect } from 'react-router-dom'
 
 const service = new AuthService()
 const periodArr = ['mensual', 'anual', 'bimestral', 'trimestral', 'semestral']
@@ -23,6 +24,7 @@ export default class subscriptionForm extends Component {
     value: '',
     formatMoment: 'DD, MM, YYYY',
     oneLabel: '',
+    navigate: false,
     form: {
       subscription: '',
       name: '',
@@ -150,11 +152,17 @@ export default class subscriptionForm extends Component {
     event.preventDefault()
     service
       .newSubscriptionForm(this.state.form)
-      .then(response => console.log('You created a new subscription!'))
+      .then(response => {
+        console.log('You created a new subscription!')
+        if (response) this.setState({ navigate: true })
+      })
       .catch(err => console.log(err))
   }
 
   render() {
+    if (this.state.navigate) {
+      return <Redirect to={'/suscriptions'} />
+    }
     //const { price } = this.state.subscription.version.hboGo
     if (!this.state.subscription) return <Preload />
     const { versions } = this.state
@@ -222,13 +230,13 @@ export default class subscriptionForm extends Component {
           {this.state.form.labels.map((label, i) => {
             return <Chip key={i}>{label}</Chip>
           })} */}
-            <input type="submit" value="Agregar suscripcion" />
-            {/* <Button
-                style={{ backgroundColor: '#37474f', color: '#fff' }}
-                onClick={this.handleSubmit}
-              >
-                Save subscription <Icon tiny>save_alt</Icon>
-              </Button> */}
+            {/* <input type="submit" value="Agregar suscripcion" /> */}
+            <Button
+              style={{ backgroundColor: '#37474f', color: '#fff' }}
+              onClick={this.handleSubmit}
+            >
+              Save subscription <Icon tiny>save_alt</Icon>
+            </Button>
           </Card>
         </form>
       </div>

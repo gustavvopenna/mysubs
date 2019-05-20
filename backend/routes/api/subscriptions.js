@@ -20,7 +20,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const {
     name,
-    subType,
+    planSelected,
     price,
     paymentDate,
     period,
@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
   Subscription.create({
     subscription: req.params.id,
     name,
-    subType,
+    planSelected,
     price,
     paymentDate,
     period,

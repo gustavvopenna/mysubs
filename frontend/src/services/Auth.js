@@ -62,6 +62,15 @@ class AuthService {
         return { error: err }
       })
   }
+
+  getUser = () => {
+    return this.service
+      .get('/api/user')
+      .then(response => response)
+      .catch(err => {
+        return { err: err }
+      })
+  }
 }
 
 export default AuthService

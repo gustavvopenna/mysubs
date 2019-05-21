@@ -32,7 +32,7 @@ export default class Suscriptions extends Component {
     if (!this.state.userSubscriptions) return <Preload />
     return (
       <div className="container">
-        <h4>Subscriptions</h4>
+        <h4>Mis suscripciones</h4>
         {this.state.userSubscriptions.map((sub, i) => {
           return <CardComponent key={i} {...sub} />
         })}

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { Button, Card } from 'react-materialize'
+import { Button, Card, Navbar } from 'react-materialize'
 import { Link } from 'react-router-dom'
 import AuthService from '../../services/Auth'
 import logo from '../../images/logo.png'
+import Preload from '../Preload'
 
 const service = new AuthService()
 
 export default class Suscriptions extends Component {
   state = {
-    userSubscriptions: []
+    userSubscriptions: undefined
   }
 
   componentWillMount() {
@@ -28,11 +29,12 @@ export default class Suscriptions extends Component {
   }
 
   render() {
+    if (!this.state.userSubscriptions) return <Preload />
     return (
       <div className="container">
-        <h1>Subscriptions</h1>
         {this.state.userSubscriptions.map((sub, i) => {
           return (
+            <h4>Subscriptions</h4>
             <ul className="collection">
               <li className="collection-item avatar">
                 <img src={logo} alt="" className="circle" />

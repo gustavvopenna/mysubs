@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { TextInput, Card } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import toastr from 'toastr'
-// import history from '../history'
-// import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
 const service = new AuthService()
@@ -29,11 +27,9 @@ class Login extends Component {
     service
       .login(this.state.form)
       .then(res => {
-        console.log(this.props.data)
         if (res.err) return toastr.error(res.err)
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data))
         toastr.success('Login successful')
-        //history.push('/suscriptions')
         this.props.history.push('/suscriptions')
       })
       .catch(err => console.log(err))

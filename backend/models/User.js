@@ -9,12 +9,15 @@ const userSchema = new Schema(
     name: String,
     email: {
       type: String,
-      require: true
+      require: true,
+      unique: true
     },
-    subscriptions: {
-      type: [ObjectId],
-      ref: 'Subscription'
-    }
+    subscriptions: [
+      {
+        type: ObjectId,
+        ref: 'Subscription'
+      }
+    ]
   },
   {
     timestamps: true,

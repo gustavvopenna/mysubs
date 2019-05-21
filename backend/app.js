@@ -78,5 +78,6 @@ app.use('/', index)
 //API routes
 app.use('/api/typesubscriptions', require('./routes/api/typeSubscriptions'))
 app.use('/api/subscriptions', require('./routes/api/subscriptions'))
+app.use('/api/user', require('./routes/api/user'))
 
 module.exports = app

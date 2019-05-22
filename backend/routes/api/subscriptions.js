@@ -65,9 +65,48 @@ router.patch('/:id', (req, res, next) => {
 
 //Delete a subscription
 router.delete('/:id', (req, res, next) => {
-  Subscription.findByIdAndDelete(req.params.id)
-    .then(subscription => res.status(200).json(subscription))
-    .catch(err => res.status(500).json(err))
+  User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $pull: { subscriptions: req.params.id }
+    },
+    { new: true },
+    (err, data) => {
+      console.log(err)
+      console.log(data)
+    }
+  )
+    .then(user => {
+      Subscription.findByIdAndDelete(req.params.id)
+        .then(user => res.status(200).json(user))
+        .catch(err => res.status(500).json({ msg: 'dentro del pull' }))
+      // res.status(200).json(subscription)
+    })
+    .catch(err => res.status(500).json({ msg: 'afuera' }))
+
+  // Subscription.findByIdAndRemove(req.params.id)
+  //   .then(subscription => {
+  //     User.findByIdAndUpdate(req.user._id, {
+  //       $pull: { subscriptions: { $eq: req.params.id } }
+  //     })
+  //       .then(user => res.status(200).json(user))
+  //       .catch(err => res.status(500).json({ msg: 'dentro del pull' }))
+  //     // res.status(200).json(subscription)
+  //   })
+  //   .catch(err => res.status(500).json({ msg: 'afuera' }))
+
+  // Subscription.findByIdAndRemove(req.params.id)
+  //   .then(subscription => {
+  //     User.findByIdAndUpdate(subscription.owner)
+  //       .then(user => {
+  //         user.subscriptions = user.subscriptions.filter(
+  //           id => id !== req.params.id
+  //         )
+  //         res.status(200).json(subscription)
+  //       })
+  //       .catch(err => res.status(500).json(err))
+  //   })
+  //   .catch(err => res.status(500).json(err))
 })
 
 module.exports = router

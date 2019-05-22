@@ -71,6 +71,15 @@ class AuthService {
         return { err: err }
       })
   }
+
+  deleteSubscription = id => {
+    return this.service
+      .delete(`/api/subscriptions/${id}`)
+      .then(response => response)
+      .catch(err => {
+        return { err: err }
+      })
+  }
 }
 
 export default AuthService

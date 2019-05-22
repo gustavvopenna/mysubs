@@ -7,7 +7,8 @@ export default function CardComponent({
   period,
   paymentDate,
   subscription,
-  handleDelete
+  handleDelete,
+  planSelected
 }) {
   return (
     <div>
@@ -22,6 +23,7 @@ export default function CardComponent({
           </p>
           <p style={{ textAlign: 'left' }}>{period}</p>
           <p style={{ textAlign: 'left' }}>{paymentDate}</p>
+          <p style={{ textAlign: 'left' }}>{planSelected.price}</p>
           <div className="secondary-content">
             <i className="material-icons">more_vert</i>
           </div>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
 import CardComponent from '../suscriptions/CardComponent'
+import TotalComponent from '../suscriptions/TotalComponent'
 
 const service = new AuthService()
 
@@ -45,6 +46,7 @@ export default class Suscriptions extends Component {
     return (
       <div className="container">
         <h4>Mis suscripciones</h4>
+        <TotalComponent user={this.state.userSubscriptions} />
         {this.state.userSubscriptions.map((sub, i) => {
           return <CardComponent key={i} {...sub} handleDelete={this.onDelete} />
         })}

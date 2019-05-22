@@ -1,11 +1,13 @@
 import React from 'react'
-import logo from '../../images/logo.png'
+import { Dropdown, Button, Divider } from 'react-materialize'
 
 export default function CardComponent({
+  _id,
   name,
   period,
   paymentDate,
-  subscription
+  subscription,
+  handleDelete
 }) {
   return (
     <div>
@@ -22,6 +24,9 @@ export default function CardComponent({
           <p style={{ textAlign: 'left' }}>{paymentDate}</p>
           <div className="secondary-content">
             <i className="material-icons">more_vert</i>
+          </div>
+          <div onClick={() => handleDelete(_id)} className="secondary-content">
+            <i className="material-icons">delete</i>
           </div>
         </li>
       </ul>

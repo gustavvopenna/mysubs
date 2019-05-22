@@ -28,13 +28,25 @@ export default class Suscriptions extends Component {
       .catch(err => console.log(err))
   }
 
+  onDelete = id => {
+    // e.preventDefault()
+    service.deleteSubscription(id)
+    service
+      .getUser()
+      .then(res => {
+        const { subscriptions } = res.data
+        this.setState({ userSubscriptions: subscriptions })
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
     if (!this.state.userSubscriptions) return <Preload />
     return (
       <div className="container">
         <h4>Mis suscripciones</h4>
         {this.state.userSubscriptions.map((sub, i) => {
-          return <CardComponent key={i} {...sub} />
+          return <CardComponent key={i} {...sub} handleDelete={this.onDelete} />
         })}
         <Link to={'/subscriptionsList'}>
           <Button

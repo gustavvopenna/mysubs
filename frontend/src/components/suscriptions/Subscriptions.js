@@ -39,6 +39,7 @@ export default class Suscriptions extends Component {
         <Link to={'/subscriptionsList'}>
           <Button
             floating="true"
+            fab={{ direction: 'top', toolbarEnabled: true }}
             large
             className="red"
             waves="light"

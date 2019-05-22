@@ -6,7 +6,9 @@ import {
   TextInput,
   Button,
   Chip,
-  Icon
+  Icon,
+  Row,
+  Col
 } from 'react-materialize'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
@@ -15,7 +17,7 @@ import { Redirect } from 'react-router-dom'
 
 const service = new AuthService()
 const periodArr = ['mensual', 'anual', 'bimestral', 'trimestral', 'semestral']
-const allLabelsArr = []
+let allLabelsArr = []
 
 export default class subscriptionForm extends Component {
   state = {
@@ -148,6 +150,10 @@ export default class subscriptionForm extends Component {
     // console.log(this.state.form.labels, ' all')
   }
 
+  // removeLabel = e => {
+  //   console.log('Helllo')
+  // }
+
   handleSubmit = event => {
     event.preventDefault()
     service
@@ -155,6 +161,9 @@ export default class subscriptionForm extends Component {
       .then(response => {
         console.log('You created a new subscription!')
         if (response) this.setState({ navigate: true })
+        if (response)
+          this.setState({ form: { ...this.state.form, labels: [] } })
+        allLabelsArr = []
       })
       .catch(err => console.log(err))
   }
@@ -220,17 +229,27 @@ export default class subscriptionForm extends Component {
             />
 
             {/* Label funcionality breaks everything :(  */}
-
-            {/* <TextInput
-            value={this.state.oneLabel}
-            label="Ingresa una etiqueta"
-            onChange={this.handleOneLabel}
-          />
-          <Button onClick={this.addLabel}>Add</Button>
-          {this.state.form.labels.map((label, i) => {
-            return <Chip key={i}>{label}</Chip>
-          })} */}
-            {/* <input type="submit" value="Agregar suscripcion" /> */}
+            <Row>
+              <Col>
+                <TextInput
+                  value={this.state.oneLabel}
+                  label="Ingresa una etiqueta"
+                  onChange={this.handleOneLabel}
+                />
+                <Button onClick={this.addLabel}>Add</Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {this.state.form.labels.map((label, i) => {
+                  return (
+                    <Chip close={true} key={i}>
+                      {label}
+                    </Chip>
+                  )
+                })}
+              </Col>
+            </Row>
             <Button
               style={{ backgroundColor: '#37474f', color: '#fff' }}
               onClick={this.handleSubmit}

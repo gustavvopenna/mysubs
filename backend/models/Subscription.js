@@ -35,7 +35,11 @@ const subscriptionSchema = new Schema(
       require: true
     },
     paymentMethod: String,
-    labels: []
+    labels: [
+      {
+        type: String
+      }
+    ]
   },
   {
     timestamps: true,

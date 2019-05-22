@@ -27,7 +27,11 @@ class NavComponent extends Component {
   render() {
     return (
       <div className="sidenav-close">
-        <Navbar options={{ closeOnClick: true }} className="purple lighten-2">
+        <Navbar
+          options={{ closeOnClick: true }}
+          className="purple lighten-2"
+          fixed={true}
+        >
           <SideNavItem
             userView
             user={{

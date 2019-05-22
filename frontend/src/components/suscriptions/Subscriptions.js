@@ -37,7 +37,13 @@ export default class Suscriptions extends Component {
           return <CardComponent key={i} {...sub} />
         })}
         <Link to={'/subscriptionsList'}>
-          <Button floating large className="red" waves="light" icon="add" />
+          <Button
+            floating="true"
+            large
+            className="red"
+            waves="light"
+            icon="add"
+          />
         </Link>
       </div>
     )

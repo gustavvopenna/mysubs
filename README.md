@@ -1,7 +1,11 @@
 # MySubs
 MySubs is an app to manage all your subscriptions. Optimized to mobile so please open in mobile view.
+MySubs is not a simple form like any other app in Google Play, every subscription has its own subscriptions plans so every form is totally personalized.
 
-![Checkout View](backend/public/images/resources/example1.png)
+<img src="backend/public/images/resources/example1.png" width="400" /> 
+<img src="backend/public/images/resources/example2.png" width="400" /> 
+<img src="backend/public/images/resources/example3.png" width="400" /> 
+<img src="backend/public/images/resources/example4.png" width="400" /> 
 
 ###### Backend
 

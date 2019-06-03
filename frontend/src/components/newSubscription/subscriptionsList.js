@@ -11,13 +11,11 @@ export default class subscriptionsList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     service
       .allTypeSubscriptions()
       .then(res => {
         const { data } = res
         this.setState({ subscriptions: data })
-        console.log(data)
       })
       .catch(err => console.log(err))
   }
@@ -25,7 +23,7 @@ export default class subscriptionsList extends Component {
   render() {
     return (
       <div>
-        <h1>Subscriptions List</h1>
+        <h3>Subscripciones</h3>
         {this.state.subscriptions.map(sub => {
           return (
             <Link key={sub._id} to={`/subscriptionslist/${sub._id}`}>

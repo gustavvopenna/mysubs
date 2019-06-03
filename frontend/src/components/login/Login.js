@@ -19,7 +19,6 @@ class Login extends Component {
     const { form } = this.state
     form[e.target.name] = e.target.value
     this.setState(form)
-    console.log(this.state.form)
   }
 
   handleSubmit = e => {
@@ -29,7 +28,7 @@ class Login extends Component {
       .then(res => {
         if (res.err) return toastr.error(res.err)
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data))
-        toastr.success('Login successful')
+        toastr.success('Bienvenido!')
         this.props.history.push('/suscriptions')
       })
       .catch(err => console.log(err))

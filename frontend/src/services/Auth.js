@@ -1,6 +1,7 @@
 import axios from 'axios'
+import toastr from 'toastr'
 
-const baseURL = 'http://localhost:5000/'
+const baseURL = 'https://mysubsmx.herokuapp.com'
 
 class AuthService {
   constructor() {
@@ -27,13 +28,10 @@ class AuthService {
   }
 
   logout = () => {
-    return (
-      this.service
-        .get('/api/logout')
-        .then(response => console.log(response))
-        //.catch(err => ({ err: 'Logout went wrong' }))
-        .catch(err => console.log(err))
-    )
+    return this.service
+      .get('/api/logout')
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
   }
 
   allTypeSubscriptions = () => {
@@ -59,7 +57,9 @@ class AuthService {
       .post('/api/subscriptions', form)
       .then(response => response)
       .catch(err => {
-        return { error: err }
+        return(
+          toastr.error('No se agregó tu suscripción, llena todos los campos')
+        )
       })
   }
 

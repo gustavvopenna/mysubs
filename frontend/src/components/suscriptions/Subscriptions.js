@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { Button, Card, Navbar } from 'react-materialize'
+import { Button } from 'react-materialize'
 import { Link } from 'react-router-dom'
 import AuthService from '../../services/Auth'
 import Preload from '../Preload'
 import CardComponent from '../suscriptions/CardComponent'
 import TotalComponent from '../suscriptions/TotalComponent'
+import toastr from 'toastr'
 
 const service = new AuthService()
 
 export default class Suscriptions extends Component {
   state = {
-    userSubscriptions: undefined
+    userSubscriptions: []
   }
 
   componentWillMount() {
@@ -30,13 +31,13 @@ export default class Suscriptions extends Component {
   }
 
   onDelete = id => {
-    // e.preventDefault()
     service.deleteSubscription(id)
     service
       .getUser()
       .then(res => {
         const { subscriptions } = res.data
         this.setState({ userSubscriptions: subscriptions })
+        toastr.success('Suscripción eliminada')
       })
       .catch(err => console.log(err))
   }

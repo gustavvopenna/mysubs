@@ -44,7 +44,11 @@ app.use(passport.session())
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:5000']
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5000',
+      process.env.prodURL
+    ]
   })
 )
 
@@ -73,11 +77,14 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 app.locals.title = 'Express - Generated with IronGenerator'
 
 const index = require('./routes/index')
-app.use('/', index)
 
 //API routes
 app.use('/api/typesubscriptions', require('./routes/api/typeSubscriptions'))
 app.use('/api/subscriptions', require('./routes/api/subscriptions'))
 app.use('/api/user', require('./routes/api/user'))
+app.use('/', index)
+app.use('/*', (req, res, next) =>
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+)
 
 module.exports = app

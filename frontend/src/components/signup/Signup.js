@@ -20,7 +20,6 @@ export default class Signup extends Component {
     const { form } = this.state
     form[e.target.name] = e.target.value
     this.setState(form)
-    //console.log(this.state.form)
   }
 
   handleSubmit = e => {
@@ -28,7 +27,6 @@ export default class Signup extends Component {
     service
       .signup(this.state.form)
       .then(res => {
-        console.log(res)
         toastr.success('You successfuly created an account')
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data))
         setTimeout(() => this.setState({ navigate: true }), 2000)

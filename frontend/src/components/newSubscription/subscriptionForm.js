@@ -40,42 +40,32 @@ export default class subscriptionForm extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.form)
     const { id } = this.props.match.params
-    console.log(this.props)
     service
       .oneTypeSubscriptions(id)
       .then(res => {
         const { data } = res
-        //console.log(data, ' HEEEEY')
         this.setState({ subscription: data })
         this.setState({ form: { ...this.state.form, name: data.name } })
-        console.log(this.state.form.name)
-
         this.setState({ form: { ...this.state.form, subscription: id } })
-        console.log(this.state.form.subscription)
-        // this.setState({ form: { subscription: data._id } })
-        // console.log(this.state.form.subscription)
+
         //to get price
         const versions = Object.entries(this.state.subscription.version)
-        console.log(versions)
+
         // Define initial price
         this.setState({
           form: { ...this.state.form, price: versions[0][1].price }
         })
-        console.log(this.state.price)
+
         //to get subscription type
         this.setState({ versions: versions })
-        console.log(this.state.versions)
       })
       .catch(err => console.log(err))
   }
 
   handleChange = event => {
     this.setState({ value: event.target.value })
-    // console.log(event.target.value)
     const version = event.target.value
-    //console.log(this.state.subscription.version[version])
     this.setState({
       price: this.state.subscription.version[version].price
     })
@@ -87,20 +77,18 @@ export default class subscriptionForm extends Component {
         }
       },
       () => {
-        console.log(this.state.form.planSelected)
+        // console.log(this.state.form.planSelected)
       }
     )
   }
 
   handleDate = event => {
-    console.log(event)
     this.setState({
       form: {
         ...this.state.form,
         paymentDate: moment(event).format(this.state.formatMoment)
       }
     })
-    console.log(this.state.form.paymentDate)
   }
 
   //Callback after setState config helps to not have delay in updating state
@@ -108,7 +96,7 @@ export default class subscriptionForm extends Component {
     this.setState(
       { form: { ...this.state.form, period: event.target.value } },
       () => {
-        console.log(this.state.form.period)
+        // console.log(this.state.form.period)
       }
     )
   }
@@ -117,14 +105,14 @@ export default class subscriptionForm extends Component {
     this.setState(
       { form: { ...this.state.form, paymentMethod: event.target.value } },
       () => {
-        console.log(this.state.form.paymentMethod)
+        // console.log(this.state.form.paymentMethod)
       }
     )
   }
 
   handleOneLabel = event => {
     this.setState({ oneLabel: event.target.value }, () => {
-      console.log(this.state.oneLabel)
+      // console.log(this.state.oneLabel)
     })
   }
 
@@ -138,21 +126,14 @@ export default class subscriptionForm extends Component {
         form: { ...this.state.form, labels: allLabelsArr }
       },
       () => {
-        console.log(this.state.form.labels)
+        // console.log(this.state.form.labels)
       }
     )
 
     this.setState({ oneLabel: '' }, () => {
-      console.log(this.state.oneLabel)
+      // console.log(this.state.oneLabel)
     })
-
-    // console.log(this.state.oneLabel, ' one label')
-    // console.log(this.state.form.labels, ' all')
   }
-
-  // removeLabel = e => {
-  //   console.log('Helllo')
-  // }
 
   handleSubmit = event => {
     event.preventDefault()
@@ -172,7 +153,6 @@ export default class subscriptionForm extends Component {
     if (this.state.navigate) {
       return <Redirect to={'/suscriptions'} />
     }
-    //const { price } = this.state.subscription.version.hboGo
     if (!this.state.subscription) return <Preload />
     const { versions } = this.state
     return (
@@ -197,7 +177,6 @@ export default class subscriptionForm extends Component {
                 Choose your option
               </option>
               {versions.map((version, i) => {
-                //console.log(this.state.subscription.version, '  wtFFFF')
                 return (
                   <option value={version[1].key_name}>{version[1].name}</option>
                 )
@@ -227,8 +206,6 @@ export default class subscriptionForm extends Component {
               onChange={this.handlePaymentMethod}
               label="Método de pago. Ej. Tarjeta Banamex 6098"
             />
-
-            {/* Label funcionality breaks everything :(  */}
             <Row>
               <Col>
                 <TextInput
@@ -236,7 +213,7 @@ export default class subscriptionForm extends Component {
                   label="Ingresa una etiqueta"
                   onChange={this.handleOneLabel}
                 />
-                <Button onClick={this.addLabel}>Add</Button>
+                <Button onClick={this.addLabel}>Añadir etiqueta</Button>
               </Col>
             </Row>
             <Row>
@@ -254,7 +231,7 @@ export default class subscriptionForm extends Component {
               style={{ backgroundColor: '#37474f', color: '#fff' }}
               onClick={this.handleSubmit}
             >
-              Save subscription <Icon tiny>save_alt</Icon>
+              Agregar suscripción <Icon tiny>save_alt</Icon>
             </Button>
           </Card>
         </form>

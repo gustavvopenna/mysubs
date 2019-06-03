@@ -29,7 +29,6 @@ router.post('/', (req, res, next) => {
     paymentMethod,
     labels
   } = req.body
-  console.log(req, 'THIS IS THE USEEEEER')
   Subscription.create({
     owner: req.user._id,
     subscription,
@@ -83,30 +82,6 @@ router.delete('/:id', (req, res, next) => {
       // res.status(200).json(subscription)
     })
     .catch(err => res.status(500).json({ msg: 'afuera' }))
-
-  // Subscription.findByIdAndRemove(req.params.id)
-  //   .then(subscription => {
-  //     User.findByIdAndUpdate(req.user._id, {
-  //       $pull: { subscriptions: { $eq: req.params.id } }
-  //     })
-  //       .then(user => res.status(200).json(user))
-  //       .catch(err => res.status(500).json({ msg: 'dentro del pull' }))
-  //     // res.status(200).json(subscription)
-  //   })
-  //   .catch(err => res.status(500).json({ msg: 'afuera' }))
-
-  // Subscription.findByIdAndRemove(req.params.id)
-  //   .then(subscription => {
-  //     User.findByIdAndUpdate(subscription.owner)
-  //       .then(user => {
-  //         user.subscriptions = user.subscriptions.filter(
-  //           id => id !== req.params.id
-  //         )
-  //         res.status(200).json(subscription)
-  //       })
-  //       .catch(err => res.status(500).json(err))
-  //   })
-  //   .catch(err => res.status(500).json(err))
 })
 
 module.exports = router

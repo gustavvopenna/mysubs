@@ -18,7 +18,7 @@ class NavComponent extends Component {
       .logout()
       .then(res => {
         window.localStorage.clear()
-        toastr.success('Logout successful!')
+        toastr.success('Saliste de tu cuenta, esperamos que vuelvas pronto!')
         this.props.history.push('/login')
       })
       .catch(err => toastr.error(err))

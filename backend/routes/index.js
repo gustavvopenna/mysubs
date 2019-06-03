@@ -4,11 +4,6 @@ const User = require('../models/User')
 const passport = require('../handlers/passport')
 const isLogged = require('../middlewares')
 
-/* GET home page */
-router.get('/', (req, res, next) => {
-  res.send('Hello from index')
-})
-
 router.post('/api/signup', (req, res, next) => {
   User.register(req.body, req.body.password)
     .then(user => res.status(200).json(user))
@@ -32,7 +27,6 @@ router.post('/api/login', (req, res, next) => {
 
 router.get('/api/logout', (req, res, next) => {
   req.logout()
-  console.log(res.user, ' despues')
   res.status(200).json({ user: res.user })
   // res.redirect('/')
 })

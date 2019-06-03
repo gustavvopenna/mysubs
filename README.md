@@ -20,7 +20,7 @@ Built using Javascript(ES6), React and Axios.
 Clone this repo
 
 ```
-git clone ...
+git clone https://github.com/gustavvopenna/mysubs.git
 
 ```
 

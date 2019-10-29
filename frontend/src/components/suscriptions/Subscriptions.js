@@ -25,7 +25,6 @@ export default class Suscriptions extends Component {
       .then(res => {
         const { subscriptions } = res.data
         this.setState({ userSubscriptions: subscriptions })
-        console.log(this.state.userSubscriptions)
       })
       .catch(err => console.log(err))
   }
@@ -45,7 +44,7 @@ export default class Suscriptions extends Component {
   render() {
     if (!this.state.userSubscriptions) return <Preload />
     return (
-      <div className="container">
+      <div className='container'>
         <h4>Mis suscripciones</h4>
         <TotalComponent user={this.state.userSubscriptions} />
         {this.state.userSubscriptions.map((sub, i) => {
@@ -56,9 +55,9 @@ export default class Suscriptions extends Component {
             floating
             fab={{ direction: 'top', toolbarEnabled: true }}
             large
-            className="red"
-            waves="light"
-            icon="add"
+            className='red'
+            waves='light'
+            icon='add'
           />
         </Link>
       </div>

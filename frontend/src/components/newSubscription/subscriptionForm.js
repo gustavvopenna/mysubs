@@ -75,9 +75,6 @@ export default class subscriptionForm extends Component {
           ...this.state.form,
           planSelected: this.state.subscription.version[version]
         }
-      },
-      () => {
-        // console.log(this.state.form.planSelected)
       }
     )
   }
@@ -94,26 +91,18 @@ export default class subscriptionForm extends Component {
   //Callback after setState config helps to not have delay in updating state
   handlePeriod = event => {
     this.setState(
-      { form: { ...this.state.form, period: event.target.value } },
-      () => {
-        // console.log(this.state.form.period)
-      }
+      { form: { ...this.state.form, period: event.target.value } }
     )
   }
 
   handlePaymentMethod = event => {
     this.setState(
-      { form: { ...this.state.form, paymentMethod: event.target.value } },
-      () => {
-        // console.log(this.state.form.paymentMethod)
-      }
+      { form: { ...this.state.form, paymentMethod: event.target.value } }
     )
   }
 
   handleOneLabel = event => {
-    this.setState({ oneLabel: event.target.value }, () => {
-      // console.log(this.state.oneLabel)
-    })
+    this.setState({ oneLabel: event.target.value }
   }
 
   addLabel = event => {
@@ -124,15 +113,10 @@ export default class subscriptionForm extends Component {
     this.setState(
       {
         form: { ...this.state.form, labels: allLabelsArr }
-      },
-      () => {
-        // console.log(this.state.form.labels)
       }
     )
 
-    this.setState({ oneLabel: '' }, () => {
-      // console.log(this.state.oneLabel)
-    })
+    this.setState({ oneLabel: '' }
   }
 
   handleSubmit = event => {
